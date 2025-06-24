@@ -18,14 +18,12 @@ type ReminderRequest struct {
 }
 
 func main() {
-	// เชื่อม Temporal client
 	c, err := client.Dial(client.Options{})
 	if err != nil {
 		log.Fatalf("Temporal client connect failed: %v", err)
 	}
 	defer c.Close()
 
-	// Handler หลัก
 	reminderHandler := func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			http.Error(w, "Only POST allowed", http.StatusMethodNotAllowed)
@@ -60,14 +58,14 @@ func main() {
 		json.NewEncoder(w).Encode(resp)
 	}
 
-	// ✅ ใช้ corsMiddleware ครอบ handler
+	// CORS middleware
 	http.Handle("/reminder", corsMiddleware(http.HandlerFunc(reminderHandler)))
 
 	log.Println("Backend API running on :8081")
 	log.Fatal(http.ListenAndServe(":8081", nil))
 }
 
-// ✅ Middleware สำหรับแก้ CORS
+// CORS Function
 func corsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*") // หรือระบุ origin ก็ได้

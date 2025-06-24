@@ -9,6 +9,8 @@ import (
 	"go.temporal.io/sdk/client"
 )
 
+// ! FOR TEST WITHOUT API
+// ! RUN THIS FILE FOR TEST
 func main() {
 	c, err := client.Dial(client.Options{})
 	if err != nil {

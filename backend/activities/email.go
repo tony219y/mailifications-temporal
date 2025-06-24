@@ -6,7 +6,7 @@ import (
 )
 
 func SendEmail(ctx context.Context, email string) error {
+	//print this msg after delay
 	fmt.Println("📧 Sending email to:", email)
-	// Mock delay or actual email sending here
 	return nil
 }
