@@ -29,4 +29,8 @@ cd backend
 go run ./cmd/api/main.go
 ```
 
+## Download Temporal CLI
+
+https://learn.temporal.io/getting_started/go/dev_environment
+
 
